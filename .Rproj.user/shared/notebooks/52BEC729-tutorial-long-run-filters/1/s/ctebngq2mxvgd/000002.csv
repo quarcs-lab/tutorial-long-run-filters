@@ -1,4 +1,0 @@
-"0","seriesName_filtered_Hamilton <- yth_filter(seriesName, "
-"0","                                           h = 2, "
-"0","                                           p = 2, "
-"0","                                           output = c(""x"", ""trend"", ""cycle""))"

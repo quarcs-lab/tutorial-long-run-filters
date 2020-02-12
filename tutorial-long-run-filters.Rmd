@@ -58,7 +58,6 @@ Code examples for other series
 # Load libraries
 
 ```{r message=FALSE, warning=FALSE}
-# install.packages(c("mFilter", "quantmod"))
 library(mFilter)
 library(quantmod)
 library(dplyr)
@@ -116,13 +115,17 @@ seriesName_filtered_HP <- hpfilter(seriesName,
 
 ### Long-run trend
 
-Create matrix of actual and trend values
+Create matrix of actual, trend , and cycle values
 
 ```{r}
-actual <- seriesName_filtered_HP[["x"]]
-colnames(actual)  <- c("actual")
+actual  <- seriesName_filtered_HP[["x"]]
 trendHP <- seriesName_filtered_HP[["trend"]]
+cycleHP <- actual - trendHP
+
+colnames(actual)   <- c("actual")
 colnames(trendHP)  <- c("trendHP")
+colnames(cycleHP)  <- c("cycleHP")
+
 actual_and_trend <- cbind(actual, trendHP)
 ```
 
@@ -138,7 +141,7 @@ dygraph(actual_and_trend[,1:2]) %>%
 ### Short-run fluctuations
 
 ```{r}
-dygraph(seriesName_filtered_HP[["x"]]- seriesName_filtered_HP[["trend"]])  %>% 
+dygraph(cycleHP)  %>% 
   dyRangeSelector()
 ```
 
@@ -148,7 +151,7 @@ dygraph(seriesName_filtered_HP[["x"]]- seriesName_filtered_HP[["trend"]])  %>%
 ```{r}
 seriesName_filtered_Hamilton <- yth_filter(seriesName, 
                                            h = 2, 
-                                           p = 2, 
+                                           p = 4, 
                                            output = c("x", "trend", "cycle"))
 ```
 
@@ -156,6 +159,15 @@ seriesName_filtered_Hamilton <- yth_filter(seriesName,
 ## Plot the Hamiltion filter
 
 ### Long-run trend
+
+Rename columns
+
+```{r}
+colnames(seriesName_filtered_Hamilton)  <- c("actual",
+                                             "trendHamilton",
+                                             "cycleHamilton")
+```
+
 
 ```{r}
 dygraph(seriesName_filtered_Hamilton[,1:2])  %>% 
@@ -179,11 +191,11 @@ dygraph(seriesName_filtered_Hamilton[,3])  %>%
 
 # References 
 
+- [Schüler, Y., 2018. On the cyclical properties of Hamilton's regression filter (No. 03/2018). Deutsche Bundesbank.](https://www.econstor.eu/bitstream/10419/174891/1/1014338883.pdf)
+
 - <http://past.rinfinance.com/agenda/2018/JustinShea.pdf>
 
 - <https://www.r-econometrics.com/timeseries/economic-cycle-extraction/>
-
-- <https://www.econstor.eu/bitstream/10419/174891/1/1014338883.pdf>
 
 - <https://www.datacamp.com/community/blog/r-xts-cheat-sheet>
 
