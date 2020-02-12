@@ -1,0 +1,5 @@
+"0","actual <- seriesName_filtered_HP[[""x""]]"
+"0","colnames(actual)  <- c(""actual"")"
+"0","trendHP <- seriesName_filtered_HP[[""trend""]]"
+"0","colnames(trendHP)  <- c(""trendHP"")"
+"0","actual_and_trend <- cbind(actual, trendHP)"

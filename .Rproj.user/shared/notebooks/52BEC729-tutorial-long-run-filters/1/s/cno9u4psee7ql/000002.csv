@@ -1,0 +1,1 @@
+"0","seriesName <- getSymbols(seriesName, src=""FRED"", auto.assign = FALSE)"

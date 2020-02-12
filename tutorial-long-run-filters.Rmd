@@ -1,0 +1,190 @@
+---
+title: "Long Run vs Short Run Decompositions in R"
+subtitle: "The HP filter vs the Hamilton filter"
+author: "Carlos Mendez"
+output: 
+  html_notebook:
+    code_folding: show
+    highlight: monochrome
+    number_sections: yes
+    theme: cosmo
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+---
+
+<style>
+h1.title {font-size: 18pt; color: DarkBlue;} 
+body, h1, h2, h3, h4 {font-family: "Palatino", serif;}
+body {font-size: 12pt;}
+/* Headers */
+h1,h2,h3,h4,h5,h6{font-size: 14pt; color: #00008B;}
+body {color: #333333;}
+a, a:hover {color: #8B3A62;}
+pre {font-size: 12px;}
+</style>
+
+
+Suggested Citation: 
+
+> Mendez C. (2020). Long Run vs Short Run Decompositions in R: The HP filter vs the Hamilton filter. R Studio/RPubs. Available at <https://rpubs.com/quarcs-lab/long-run-filters>
+
+This work is licensed under the Creative Commons Attribution-Share Alike 4.0 International License. 
+![](License.png)
+
+
+
+
+# Set parameters of the program
+
+- Name of the series
+
+```{r}
+seriesName <- "RGDPNAIDA666NRUG"
+```
+
+Code examples for other series
+
+- Total GDP of Japan: "JPNRGDPEXP"
+- GDP per capita of Japan: "RGDPCHJPA625NUPN"
+- GPD per capita of Bolivia:  "NYGDPPCAPKDBOL"
+- Total GDP of Bolivia: "RGDPNABOA666NRUG"
+- Total GDP of Indonesia: "RGDPNAIDA666NRUG"
+
+
+
+# Load libraries
+
+```{r message=FALSE, warning=FALSE}
+# install.packages(c("mFilter", "quantmod"))
+library(mFilter)
+library(quantmod)
+library(dplyr)
+library(ggplot2)
+library(dygraphs)
+library(xts)
+library(neverhpfilter)
+
+# Change the presentation of decimal numbers to 4 and avoid scientific notation
+options(prompt="R> ", digits=3, scipen=999)
+```
+
+
+# Import data
+
+```{r}
+seriesName <- getSymbols(seriesName, src="FRED", auto.assign = FALSE)
+```
+
+```{r}
+periodicity(seriesName)
+```
+
+
+
+# Transform the data
+
+- Take the log of the series
+
+```{r}
+seriesName <- log(seriesName)
+```
+
+
+# Plot evolution of the variable
+
+
+```{r}
+dygraph(seriesName) %>% 
+  dyRangeSelector()
+```
+
+
+
+# Apply the HP filter
+
+
+```{r}
+seriesName_filtered_HP <- hpfilter(seriesName, 
+                                  freq = 6.25      
+                                     )
+```
+
+## Plot the HP filter
+
+### Long-run trend
+
+Create matrix of actual and trend values
+
+```{r}
+actual <- seriesName_filtered_HP[["x"]]
+colnames(actual)  <- c("actual")
+trendHP <- seriesName_filtered_HP[["trend"]]
+colnames(trendHP)  <- c("trendHP")
+actual_and_trend <- cbind(actual, trendHP)
+```
+
+
+```{r}
+dygraph(actual_and_trend[,1:2]) %>%
+  dyRangeSelector()
+```
+
+
+
+
+### Short-run fluctuations
+
+```{r}
+dygraph(seriesName_filtered_HP[["x"]]- seriesName_filtered_HP[["trend"]])  %>% 
+  dyRangeSelector()
+```
+
+
+# Apply the Hamilton filter
+
+```{r}
+seriesName_filtered_Hamilton <- yth_filter(seriesName, 
+                                           h = 2, 
+                                           p = 2, 
+                                           output = c("x", "trend", "cycle"))
+```
+
+
+## Plot the Hamiltion filter
+
+### Long-run trend
+
+```{r}
+dygraph(seriesName_filtered_Hamilton[,1:2])  %>% 
+  dyRangeSelector()
+```
+
+
+### Short-run fluctuation
+
+```{r}
+dygraph(seriesName_filtered_Hamilton[,3])  %>% 
+  dyRangeSelector()
+```
+
+
+
+# Run it in the cloud
+
+<https://rstudio.cloud/project/25043>
+
+
+# References 
+
+- <http://past.rinfinance.com/agenda/2018/JustinShea.pdf>
+
+- <https://www.r-econometrics.com/timeseries/economic-cycle-extraction/>
+
+- <https://www.econstor.eu/bitstream/10419/174891/1/1014338883.pdf>
+
+- <https://www.datacamp.com/community/blog/r-xts-cheat-sheet>
+
+- <https://rstudio.github.io/dygraphs/>
