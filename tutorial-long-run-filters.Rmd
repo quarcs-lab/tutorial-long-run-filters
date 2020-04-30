@@ -1,8 +1,12 @@
 ---
 title: "Long Run vs Short Run Decompositions in R"
-subtitle: "The HP filter vs the Hamilton filter"
 author: "Carlos Mendez"
-output: 
+subtitle: The HP filter vs the Hamilton filter
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '4'
   html_notebook:
     code_folding: show
     highlight: monochrome
@@ -186,8 +190,11 @@ dygraph(seriesName_filtered_Hamilton[,3])  %>%
 
 # Run it in the cloud
 
+Tip: Copy and paste this link another tab of your browser.
+
 <https://rstudio.cloud/project/25043>
 
+Or simply <a href="https://rstudio.cloud/project/25043" target="_blank">ClickHERE</a>
 
 # References 
 
