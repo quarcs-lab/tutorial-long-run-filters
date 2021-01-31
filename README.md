@@ -1,6 +1,6 @@
 RStudio: [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/quarcs-lab/tutorial-long-run-filters/main?urlpath=rstudio)
 
-# Long Run vs Short Run Decompositions in R
+# Long Run vs Short Run Decompositions in R:  The HP filter vs the Hamilton filter
 
 - https://rpubs.com/quarcs-lab/573944
 
@@ -10,30 +10,10 @@ RStudio: [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/
 
 - This notebook can also be executed online at [GESIS Notebooks](https://notebooks.gesis.org). Just copy the URL of this repository and paste it on the [BINDER form](https://notebooks.gesis.org/binder/) To open a virtual R Studio session, make sure you change you click on `File` and change it to `URL`. Then, write `rstudio` in the field `URL to open (optional)`. Finally, click on `launch`.  
 
----
-
-## Terms of Use
-
-Materials are licensed under [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/).
 
 [![Creative Commons Lizenzvertrag](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 
 ---
-
-Long Run vs Short Run Decompositions in R
-================
-Carlos Mendez
-
-<style>
-h1.title {font-size: 18pt; color: DarkBlue;}
-body, h1, h2, h3, h4 {font-family: "Palatino", serif;}
-body {font-size: 12pt;}
-/* Headers */
-h1,h2,h3,h4,h5,h6{font-size: 14pt; color: #00008B;}
-body {color: #333333;}
-a, a:hover {color: #8B3A62;}
-pre {font-size: 12px;}
-</style>
 
 Suggested Citation:
 
@@ -43,6 +23,10 @@ Suggested Citation:
 
 This work is licensed under the Creative Commons Attribution-Share Alike
 4.0 International License. ![](License.png)
+
+---
+
+# Tutorial
 
 # Set parameters of the program
 
