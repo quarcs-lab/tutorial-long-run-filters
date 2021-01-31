@@ -1,4 +1,4 @@
-RStudio: [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/quarcs-lab/tutorial-long-run-filters/main?urlpath=rstudio)
+RStudio: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/quarcs-lab/tutorial-long-run-filters/HEAD?urlpath=rstudio)
 
 # Long Run vs Short Run Decompositions in R:  The HP filter vs the Hamilton filter
 
