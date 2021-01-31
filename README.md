@@ -21,9 +21,6 @@ Suggested Citation:
 > filter vs the Hamilton filter. R Studio/RPubs. Available at
 > <https://rpubs.com/quarcs-lab/long-run-filters>
 
-This work is licensed under the Creative Commons Attribution-Share Alike
-4.0 International License. ![](License.png)
-
 ---
 
 # Tutorial
