@@ -54,7 +54,7 @@ library(dygraphs)
 library(xts)
 library(neverhpfilter)
 
-# Change the presentation of decimal numbers to 4 and avoid scientific notation
+# Change the presentation of decimal numbers to 3 and avoid scientific notation
 options(digits=3, scipen=999)
 ```
 
